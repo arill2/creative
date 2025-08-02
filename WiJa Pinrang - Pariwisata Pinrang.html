@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WiJa Pinrang - Discover Paradise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+        --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.15);
+        --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.2);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: #2d3748;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-gradient);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-gradient);
+      }
+
+      /* Header Styles */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .header.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: var(--shadow-light);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        position: relative;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+      }
+
+      .logo-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid transparent;
+        background: var(--primary-gradient);
+        padding: 2px;
+      }
+
+      .logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #4a5568;
+        font-weight: 500;
+        font-size: 0.95rem;
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links a::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+        transform: translateY(-2px);
+      }
+
+      .nav-links a:hover::before {
+        width: 100%;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--primary-gradient);
+        margin: 3px 0;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: var(--shadow-light);
+        display: none;
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+      }
+
+      .mobile-menu ul {
+        list-style: none;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .mobile-menu a {
+        text-decoration: none;
+        color: #4a5568;
+        font-weight: 500;
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu a:hover {
+        color: #667eea;
+        padding-left: 1rem;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        background: var(--primary-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-content {
+        z-index: 2;
+        position: relative;
+        max-width: 1200px;
+        padding: 0 2rem;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 800px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-bottom: 3rem;
+        box-shadow: var(--shadow-heavy);
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        animation: slideUp 1s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        font-weight: 300;
+        margin-bottom: 3rem;
+        opacity: 0.95;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section Styles */
+      .section {
+        padding: 6rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 4rem;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        border-radius: 2px;
+      }
+
+      .section-title.wisata {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.wisata::after {
+        background: var(--accent-gradient);
+      }
+
+      .section-title.oleh-oleh {
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.oleh-oleh::after {
+        background: var(--success-gradient);
+      }
+
+      .section-title.penginapan {
+        background: var(--secondary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.penginapan::after {
+        background: var(--secondary-gradient);
+      }
+
+      .section-title.jasa-travel {
+        background: var(--warning-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.jasa-travel::after {
+        background: var(--warning-gradient);
+      }
+
+      .section-title.fotografi {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.fotografi::after {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      }
+
+      .section-title.kuliner {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .section-title.kuliner::after {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      }
+
+      /* Card Grid */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--primary-gradient);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-heavy);
+      }
+
+      .card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .card-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover .card-image {
+        transform: scale(1.05);
+      }
+
+      .card-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #2d3748;
+      }
+
+      .card-button {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin-top: auto;
+        width: 100%;
+      }
+
+      .card-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .card-button:hover::before {
+        left: 100%;
+      }
+
+      .card-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .card-details {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        border-left: 4px solid;
+        animation: slideDown 0.3s ease-out;
+        display: none;
+      }
+
+      .card-details.show {
+        display: block;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card-details.wisata {
+        border-left-color: #4facfe;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 172, 254, 0.1) 0%,
+          rgba(0, 242, 254, 0.1) 100%
+        );
+      }
+
+      .card-details.oleh-oleh {
+        border-left-color: #43e97b;
+        background: linear-gradient(
+          135deg,
+          rgba(67, 233, 123, 0.1) 0%,
+          rgba(56, 249, 215, 0.1) 100%
+        );
+      }
+
+      .card-details.penginapan {
+        border-left-color: #f093fb;
+        background: linear-gradient(
+          135deg,
+          rgba(240, 147, 251, 0.1) 0%,
+          rgba(245, 87, 108, 0.1) 100%
+        );
+      }
+
+      .card-details.jasa-travel {
+        border-left-color: #fa709a;
+        background: linear-gradient(
+          135deg,
+          rgba(250, 112, 154, 0.1) 0%,
+          rgba(254, 225, 64, 0.1) 100%
+        );
+      }
+
+      .card-details.fotografi {
+        border-left-color: #fcb69f;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 236, 210, 0.3) 0%,
+          rgba(252, 182, 159, 0.3) 100%
+        );
+      }
+
+      .card-details.kuliner {
+        border-left-color: #ff9a9e;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 154, 158, 0.1) 0%,
+          rgba(254, 207, 239, 0.1) 100%
+        );
+      }
+
+      .card-details p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .card-details strong {
+        color: #2d3748;
+        font-weight: 600;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--dark-gradient);
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="b" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.05"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="80" fill="url(%23b)"/><circle cx="900" cy="200" r="120" fill="url(%23b)"/><circle cx="300" cy="800" r="100" fill="url(%23b)"/></svg>');
+      }
+
+      .footer-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .footer-text {
+        opacity: 0.8;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .social-link:hover {
+        transform: translateY(-5px) scale(1.1);
+        background: var(--primary-gradient);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .copyright {
+        opacity: 0.6;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .section {
+          padding: 4rem 1rem;
+        }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .hero-content {
+          padding: 0 1rem;
+        }
+
+        .hero-image {
+          height: 250px;
+          margin-bottom: 2rem;
+        }
+      }
+
+      /* Animation Classes */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Loading Animation */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="nav-container">
+        <a href="#home" class="logo">
+          <img
+            src="img/a-logo-design-featuring-the-text-wija-pi_22isfrxGS6SrYhSZCboZVw_D3Wx2e1nRkqmtBiYzdfWZQ.jpeg"
+            alt="WiJa Pinrang Logo"
+            class="logo-img"
+          />
+          <span class="logo-text">WiJa Pinrang</span>
+        </a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#wisata">Wisata</a></li>
+            <li><a href="#oleh-oleh">Oleh-oleh</a></li>
+            <li><a href="#penginapan">Penginapan</a></li>
+            <li><a href="#jasa-travel">Jasa Travel</a></li>
+            <li><a href="#fotografi">Fotografi</a></li>
+            <li><a href="#kuliner">Kuliner</a></li>
+          </ul>
+          <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+          <ul>
+            <li><a href="#wisata">Wisata</a></li>
+            <li><a href="#oleh-oleh">Oleh-oleh</a></li>
+            <li><a href="#penginapan">Penginapan</a></li>
+            <li><a href="#jasa-travel">Jasa Travel</a></li>
+            <li><a href="#fotografi">Fotografi</a></li>
+            <li><a href="#kuliner">Kuliner</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <img
+          src="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop"
+          alt="Beautiful Pinrang Paradise"
+          class="hero-image"
+        />
+        <h1 class="hero-title">Discover Pinrang Paradise</h1>
+        <p class="hero-subtitle">
+          Jelajahi keindahan alam, budaya, dan kuliner terbaik Pinrang yang
+          menawan hati
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Wisata Section -->
+      <section class="section animate-on-scroll" id="wisata">
+        <h2 class="section-title wisata">Destinasi Wisata</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img
+              src="img/pantai-stira.jpg"
+              alt="Pantai Al-Fath Stira Paradise"
+              class="card-image"
+            />
+            <h3 class="card-title">Pantai Al-Fath Stira Paradise</h3>
+            <button
+              class="card-button"
+              data-target="wisata1"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata1">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Rp15.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Parkir
+                luas, toilet, warung makan, area bermain anak, gazebo, dan akses
+                pantai yang mudah.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/menralo.jpg  " alt="Pantai Menralo" class="card-image" />
+            <h3 class="card-title">Pantai Menralo</h3>
+            <button
+              class="card-button"
+              data-target="wisata2"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata2">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Rp10.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Area
+                parkir, warung makan, tempat duduk, dan pemandangan sunset yang
+                indah.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/lowita.jpg" alt="Pantai Lowita" class="card-image" />
+            <h3 class="card-title">Pantai Lowita</h3>
+            <button
+              class="card-button"
+              data-target="wisata3"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata3">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Rp12.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Toilet,
+                area parkir, warung, dan area snorkeling.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/bendungan.jpg"
+              alt="Bendungan Benteng"
+              class="card-image"
+            />
+            <h3 class="card-title">Bendungan Benteng</h3>
+            <button
+              class="card-button"
+              data-target="wisata4"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata4">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Gratis
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Area
+                piknik, tempat duduk, pemandangan alam, dan jalur trekking.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/sulili.jpg"
+              alt="Permandian Air Panas Sulili"
+              class="card-image"
+            />
+            <h3 class="card-title">Waterboom Sulili</h3>
+            <button
+              class="card-button"
+              data-target="wisata5"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata5">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Rp20.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Kolam
+                rendam, kamar ganti, warung makan, dan area parkir.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/pw-pinrang.jpg"
+              alt="Pinrang Waterboom"
+              class="card-image"
+            />
+            <h3 class="card-title">Pinrang Waterboom</h3>
+            <button
+              class="card-button"
+              data-target="wisata6"
+              data-section="wisata"
+            >
+              <i class="fas fa-info-circle"></i> Lihat Detail
+            </button>
+            <div class="card-details wisata" id="wisata6">
+              <p>
+                <strong><i class="fas fa-ticket-alt"></i> Harga Tiket:</strong>
+                Rp25.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Water
+                slides, kolam anak, food court, dan area parkir luas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Oleh-oleh Section -->
+      <section class="section animate-on-scroll" id="oleh-oleh">
+        <h2 class="section-title oleh-oleh">Oleh-oleh Khas</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img src="img/karasaa.jpg" alt="Karasa" class="card-image" />
+            <h3 class="card-title">Karasa</h3>
+            <button
+              class="card-button"
+              data-target="oleh1"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh1">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp15.000/paket
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Kue
+                tradisional manis khas Pinrang, terbuat dari tepung beras dan
+                gula merah.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/bolu-cukke.jpg" alt="Bolu Cukke" class="card-image" />
+            <h3 class="card-title">Bolu Cukke</h3>
+            <button
+              class="card-button"
+              data-target="oleh2"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh2">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp20.000/potong
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Kue bolu
+                lembut dengan rasa manis dan aroma pandan yang khas.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/barongko.jpg" alt="Barongko" class="card-image" />
+            <h3 class="card-title">Barongko</h3>
+            <button
+              class="card-button"
+              data-target="oleh3"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh3">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp18.000/porsi
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Kue
+                tradisional dari pisang, telur, santan, dan gula, dikukus hingga
+                lembut.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/katirisala.jpg" alt="Katarisala" class="card-image" />
+            <h3 class="card-title">Katarisala</h3>
+            <button
+              class="card-button"
+              data-target="oleh4"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh4">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp12.000/potong
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Kue
+                beras manis dengan taburan kelapa parut dan gula merah cair.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/nhanas-donut.jpg"
+              alt="Onde-onde Pinrang"
+              class="card-image"
+            />
+            <h3 class="card-title">Nhanas Donut</h3>
+            <button
+              class="card-button"
+              data-target="oleh5"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh5">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp10.000/paket
+              </p>
+              <p>Donat manis dengan berbagai topping dan rasa yang menggoda.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/rahmah-tradisional-cake.jpg"
+              alt="Keripik Ubi Pinrang"
+              class="card-image"
+            />
+            <h3 class="card-title">Rahmah Tradisional Cake</h3>
+            <button
+              class="card-button"
+              data-target="oleh6"
+              data-section="oleh-oleh"
+            >
+              <i class="fas fa-shopping-cart"></i> Lihat Harga
+            </button>
+            <div class="card-details oleh-oleh" id="oleh6">
+              <p>
+                <strong><i class="fas fa-tag"></i> Harga:</strong>
+                Rp5.000
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> K Kue
+                tradisional dengan rasa manis dan tekstur lembut, khas Pinrang.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Penginapan Section -->
+      <section class="section animate-on-scroll" id="penginapan">
+        <h2 class="section-title penginapan">Penginapan Terbaik</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img src="img/m htl.jpg" alt="M Hotel" class="card-image" />
+            <h3 class="card-title">M Hotel</h3>
+            <button
+              class="card-button"
+              data-target="penginapan1"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan1">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp350.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> AC,
+                Wi-Fi, kolam renang, restoran, dan parkir gratis.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/villa-pantai-alfath-stira.jpg"
+              alt="Villa Stira"
+              class="card-image"
+            />
+            <h3 class="card-title">Villa Stira</h3>
+            <button
+              class="card-button"
+              data-target="penginapan2"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan2">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp500.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Private
+                pool, taman, dapur, Wi-Fi, dan parkir.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://pedomanrakyat.com/assets/media/upload/2022/01/89D93549-64EE-4719-A214-CDA8A05B78EF-1536x1152.jpeg"
+              alt="Alexandria Hotel"
+              class="card-image"
+            />
+            <h3 class="card-title">Alexandria Hotel</h3>
+            <button
+              class="card-button"
+              data-target="penginapan3"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan3">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp400.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> AC,
+                Wi-Fi, restoran, layanan kamar, dan parkir.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/hotel-atiqa.jpg"
+              alt="Grand Pinrang Hotel"
+              class="card-image"
+            />
+            <h3 class="card-title">Hotel Atiqa</h3>
+            <button
+              class="card-button"
+              data-target="penginapan4"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan4">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp450.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Ballroom, spa, gym, business center, dan layanan 24 jam.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/hotel-safira.jpg"
+              alt="Sawitto Guest House"
+              class="card-image"
+            />
+            <h3 class="card-title">Hotel Safira</h3>
+            <button
+              class="card-button"
+              data-target="penginapan5"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan5">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp250.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Wi-Fi,
+                AC, breakfast, tour guide, dan transport.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/ms-hotel.jpg"
+              alt="Pinrang Beach Resort"
+              class="card-image"
+            />
+            <h3 class="card-title">MS Hotel</h3>
+            <button
+              class="card-button"
+              data-target="penginapan6"
+              data-section="penginapan"
+            >
+              <i class="fas fa-bed"></i> Lihat Detail
+            </button>
+            <div class="card-details penginapan" id="penginapan6">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp600.000/malam
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Beach
+                access, water sports, spa, restaurant, dan kids club.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Jasa Travel Section -->
+      <section class="section animate-on-scroll" id="jasa-travel">
+        <h2 class="section-title jasa-travel">Jasa Travel</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img
+              src="https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop"
+              alt="Sawitto Trans"
+              class="card-image"
+            />
+            <h3 class="card-title">Sawitto Trans</h3>
+            <button
+              class="card-button"
+              data-target="travel1"
+              data-section="jasa-travel"
+            >
+              <i class="fas fa-bus"></i> Lihat Detail
+            </button>
+            <div class="card-details jasa-travel" id="travel1">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp150.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Armada
+                AC, sopir berpengalaman, dan layanan antar-jemput.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://media.istockphoto.com/id/1500563478/id/foto/wisatawan-wanita-asia-bersantai-dan-bepergian-dengan-perahu-ekor-panjang-thailand-di-bendungan.jpg?s=1024x1024&w=is&k=20&c=9PyeBW_1Qic96OCLab9SlSaPohC0zuIR5Fjft5XUl_M="
+              alt="Nadira Wisata"
+              class="card-image"
+            />
+            <h3 class="card-title">Nadira Wisata</h3>
+            <button
+              class="card-button"
+              data-target="travel2"
+              data-section="jasa-travel"
+            >
+              <i class="fas fa-bus"></i> Lihat Detail
+            </button>
+            <div class="card-details jasa-travel" id="travel2">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp180.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Bus AC,
+                pemandu wisata, dan paket tour lengkap.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?_gl=1*1w9oin7*_ga*MTcwMzcwMjk1NC4xNzU0MTM3NTA0*_ga_8JE65Q40S6*czE3NTQxMzc1MDMkbzEkZzEkdDE3NTQxMzc2MDEkajUwJGwwJGgw"
+              alt="Pinrang Express"
+              class="card-image"
+            />
+            <h3 class="card-title">Travel Baru Muncul</h3>
+            <button
+              class="card-button"
+              data-target="travel3"
+              data-section="jasa-travel"
+            >
+              <i class="fas fa-bus"></i> Lihat Detail
+            </button>
+            <div class="card-details jasa-travel" id="travel3">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp200.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Premium
+                bus, Wi-Fi, snack, dan city tour guide.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://images.pexels.com/photos/1879305/pexels-photo-1879305.jpeg?_gl=1*kp2hxy*_ga*MTcwMzcwMjk1NC4xNzU0MTM3NTA0*_ga_8JE65Q40S6*czE3NTQxMzc1MDMkbzEkZzEkdDE3NTQxMzc2OTIkajIxJGwwJGgw"
+              alt="Golden Travel"
+              class="card-image"
+            />
+            <h3 class="card-title">Liburki Travell</h3>
+            <button
+              class="card-button"
+              data-target="travel4"
+              data-section="jasa-travel"
+            >
+              <i class="fas fa-bus"></i> Lihat Detail
+            </button>
+            <div class="card-details jasa-travel" id="travel4">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp170.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Rental
+                mobil, driver professional, dan paket wisata keluarga.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://images.pexels.com/photos/2533092/pexels-photo-2533092.jpeg?_gl=1*1080rc8*_ga*MTcwMzcwMjk1NC4xNzU0MTM3NTA0*_ga_8JE65Q40S6*czE3NTQxMzc1MDMkbzEkZzEkdDE3NTQxMzc3NjQkajQyJGwwJGgw"
+              alt="Adventure Tour Pinrang"
+              class="card-image"
+            />
+            <h3 class="card-title">Pinrang Tour & Travel</h3>
+            <button
+              class="card-button"
+              data-target="travel5"
+              data-section="jasa-travel"
+            >
+              <i class="fas fa-bus"></i> Lihat Detail
+            </button>
+            <div class="card-details jasa-travel" id="travel5">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp220.000/orang
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Adventure tour, camping equipment, trekking guide, dan outdoor
+                activities.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Fotografi Section -->
+      <section class="section animate-on-scroll" id="fotografi">
+        <h2 class="section-title fotografi">Jasa Fotografi</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img src="img/fotoyu.jpg" alt="Foto Yu Pinrang" class="card-image" />
+            <h3 class="card-title">Foto Yu Pinrang</h3>
+            <button
+              class="card-button"
+              data-target="foto1"
+              data-section="fotografi"
+            >
+              <i class="fas fa-camera"></i> Lihat Detail
+            </button>
+            <div class="card-details fotografi" id="foto1">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp200.000/sesi foto
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong> Studio
+                lengkap, fotografer profesional, dan cetak foto berkualitas.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/natural-id.jpg" alt="Natural ID" class="card-image" />
+            <h3 class="card-title">Natural ID</h3>
+            <button
+              class="card-button"
+              data-target="foto2"
+              data-section="fotografi"
+            >
+              <i class="fas fa-camera"></i> Lihat Detail
+            </button>
+            <div class="card-details fotografi" id="foto2">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp250.000/sesi outdoor
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Pemotretan outdoor, editing profesional, dan album digital.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/b-face-studio.jpg"
+              alt="Creative Studio Pinrang"
+              class="card-image"
+            />
+            <h3 class="card-title">B Face Studio</h3>
+            <button
+              class="card-button"
+              data-target="foto3"
+              data-section="fotografi"
+            >
+              <i class="fas fa-camera"></i> Lihat Detail
+            </button>
+            <div class="card-details fotografi" id="foto3">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp300.000/sesi wedding
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Wedding photography, pre-wedding, event documentation, dan video
+                shooting.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/storia.jpg" alt="Frame Photography" class="card-image" />
+            <h3 class="card-title">Storia</h3>
+            <button
+              class="card-button"
+              data-target="foto4"
+              data-section="fotografi"
+            >
+              <i class="fas fa-camera"></i> Lihat Detail
+            </button>
+            <div class="card-details fotografi" id="foto4">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp180.000/sesi portrait
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Portrait photography, family photo, product photo, dan instant
+                print.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/memory.jpg" alt="Moment Capture" class="card-image" />
+            <h3 class="card-title">Memory</h3>
+            <button
+              class="card-button"
+              data-target="foto5"
+              data-section="fotografi"
+            >
+              <i class="fas fa-camera"></i> Lihat Detail
+            </button>
+            <div class="card-details fotografi" id="foto5">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp350.000/paket lengkap
+              </p>
+              <p>
+                <strong><i class="fas fa-star"></i> Fasilitas:</strong>
+                Commercial photography, corporate event, brand photography, dan
+                social media content.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Kuliner Section -->
+      <section class="section animate-on-scroll" id="kuliner">
+        <h2 class="section-title kuliner">Kuliner Khas</h2>
+        <div class="card-grid">
+          <article class="card">
+            <img
+              src="img/palekko-galung.jpg"
+              alt="Palekko Galung"
+              class="card-image"
+            />
+            <h3 class="card-title">Palekko Galung</h3>
+            <button
+              class="card-button"
+              data-target="kuliner1"
+              data-section="kuliner"
+            >
+              <i class="fas fa-utensils"></i> Lihat Detail
+            </button>
+            <div class="card-details kuliner" id="kuliner1">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong>
+                Rp30.000/porsi
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Masakan
+                ikan khas Pinrang dengan bumbu rempah dan cara masak
+                tradisional.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/azzalea.jpg"
+              alt="Azzalea Restaurant"
+              class="card-image"
+            />
+            <h3 class="card-title">Azzalea Restaurant</h3>
+            <button
+              class="card-button"
+              data-target="kuliner2"
+              data-section="kuliner"
+            >
+              <i class="fas fa-utensils"></i> Lihat Detail
+            </button>
+            <div class="card-details kuliner" id="kuliner2">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp40.000/porsi
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Restoran
+                dengan menu masakan lokal dan internasional, suasana nyaman.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="img/devasco.jpg" alt="De Vasco Seafood" class="card-image" />
+            <h3 class="card-title">De Vasco</h3>
+            <button
+              class="card-button"
+              data-target="kuliner3"
+              data-section="kuliner"
+            >
+              <i class="fas fa-utensils"></i> Lihat Detail
+            </button>
+            <div class="card-details kuliner" id="kuliner3">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp50.000/porsi
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Restoran
+                seafood dengan menu segar dan pemandangan laut.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="data:image/jpeg;base64,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"
+              alt="Warung Soto Pinrang"
+              class="card-image"
+            />
+            <h3 class="card-title">Rumah Makan Ayam Bebek Sultan</h3>
+            <button
+              class="card-button"
+              data-target="kuliner4"
+              data-section="kuliner"
+            >
+              <i class="fas fa-utensils"></i> Lihat Detail
+            </button>
+            <div class="card-details kuliner" id="kuliner4">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong>
+                Rp25.000/mangkuk
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong> Restoran
+                vegetarian dengan menu sehat dan segar, bahan organik.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="img/joglo.jpg"
+              alt="Rumah Makan Tradisional"
+              class="card-image"
+            />
+            <h3 class="card-title">Joglo</h3>
+            <button
+              class="card-button"
+              data-target="kuliner5"
+              data-section="kuliner"
+            >
+              <i class="fas fa-utensils"></i> Lihat Detail
+            </button>
+            <div class="card-details kuliner" id="kuliner5">
+              <p>
+                <strong><i class="fas fa-money-bill"></i> Harga:</strong> Mulai
+                Rp35.000/porsi
+              </p>
+              <p>
+                <strong><i class="fas fa-info"></i> Deskripsi:</strong>Restoran
+                dengan masakan tradisional dan suasana khas Jawa.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">WiJa Pinrang</div>
+        <p class="footer-text">Discover the Beauty of Pinrang ✨</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+        <p class="copyright">
+          &copy; 2024 WiJa Pinrang. Made with ❤️ for Tourism
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // ✨ Enhanced Loading Screen with Progress Bar
+      window.addEventListener("load", () => {
+        const loading = document.getElementById("loading");
+        const spinner = loading.querySelector(".spinner");
+
+        // Add progress effect
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+          progress += Math.random() * 30;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(progressInterval);
+            setTimeout(() => {
+              loading.classList.add("hidden");
+              // Add page entrance animation
+              document.body.style.animation = "fadeIn 0.8s ease-out";
+            }, 500);
+          }
+          spinner.style.transform = `rotate(${progress * 3.6}deg) scale(${
+            1 + progress / 200
+          })`;
+        }, 100);
+      });
+
+      // 🌟 Enhanced Header with Dynamic Background
+      const header = document.getElementById("header");
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
+
+        // Dynamic header appearance
+        if (currentScrollY > 100) {
+          header.classList.add("scrolled");
+          header.style.transform =
+            currentScrollY > lastScrollY
+              ? "translateY(-100%)"
+              : "translateY(0)";
+        } else {
+          header.classList.remove("scrolled");
+          header.style.transform = "translateY(0)";
+        }
+
+        // Color shift based on scroll
+        const scrollPercentage = Math.min(currentScrollY / 1000, 1);
+        header.style.background = `rgba(255, 255, 255, ${
+          0.95 + scrollPercentage * 0.05
+        })`;
+
+        lastScrollY = currentScrollY;
+      });
+
+      // 🎯 Enhanced Mobile Menu with Ripple Effect
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      let menuOpen = false;
+
+      menuToggle.addEventListener("click", (e) => {
+        // Create ripple effect
+        const ripple = document.createElement("span");
+        const rect = menuToggle.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(102, 126, 234, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${e.clientX - rect.left - size / 2}px;
+                top: ${e.clientY - rect.top - size / 2}px;
+                pointer-events: none;
+            `;
+
+        menuToggle.style.position = "relative";
+        menuToggle.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+
+        menuOpen = !menuOpen;
+
+        if (menuOpen) {
+          mobileMenu.classList.add("active");
+          mobileMenu.style.animation = "slideDownFade 0.3s ease-out";
+          // Enhanced hamburger animation
+          const spans = menuToggle.querySelectorAll("span");
+          spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+          spans[0].style.background =
+            "linear-gradient(45deg, #f093fb, #f5576c)";
+          spans[1].style.opacity = "0";
+          spans[1].style.transform = "scale(0)";
+          spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
+          spans[2].style.background =
+            "linear-gradient(45deg, #f093fb, #f5576c)";
+        } else {
+          mobileMenu.style.animation = "slideUpFade 0.3s ease-out";
+          setTimeout(() => mobileMenu.classList.remove("active"), 300);
+          // Reset hamburger
+          const spans = menuToggle.querySelectorAll("span");
+          spans.forEach((span) => {
+            span.style.transform = "rotate(0deg) translate(0px, 0px)";
+            span.style.background = "var(--primary-gradient)";
+          });
+          spans[1].style.opacity = "1";
+          spans[1].style.transform = "scale(1)";
+        }
+      });
+
+      // 🎨 Enhanced Card Details with Animation Queue
+      document
+        .querySelectorAll("button[data-target]")
+        .forEach((button, index) => {
+          button.addEventListener("click", () => {
+            const targetId = button.getAttribute("data-target");
+            const section = button.getAttribute("data-section");
+            const targetEl = document.getElementById(targetId);
+            const card = button.closest(".card");
+
+            // Button pulse effect
+            button.style.transform = "scale(0.95)";
+            setTimeout(() => (button.style.transform = ""), 150);
+
+            if (targetEl.classList.contains("show")) {
+              targetEl.style.animation = "slideUpFade 0.3s ease-out";
+              setTimeout(() => {
+                targetEl.classList.remove("show");
+                card.style.transform = "";
+              }, 300);
+
+              // Reset button text with icon animation
+              const icon = button.querySelector("i");
+              icon.style.transform = "rotate(360deg)";
+              setTimeout(() => {
+                if (section === "wisata") {
+                  button.innerHTML =
+                    '<i class="fas fa-info-circle"></i> Lihat Detail';
+                } else if (section === "oleh-oleh") {
+                  button.innerHTML =
+                    '<i class="fas fa-shopping-cart"></i> Lihat Harga';
+                } else if (section === "penginapan") {
+                  button.innerHTML = '<i class="fas fa-bed"></i> Lihat Detail';
+                } else if (section === "jasa-travel") {
+                  button.innerHTML = '<i class="fas fa-bus"></i> Lihat Detail';
+                } else if (section === "fotografi") {
+                  button.innerHTML =
+                    '<i class="fas fa-camera"></i> Lihat Detail';
+                } else if (section === "kuliner") {
+                  button.innerHTML =
+                    '<i class="fas fa-utensils"></i> Lihat Detail';
+                }
+                icon.style.transform = "";
+              }, 150);
+            } else {
+              targetEl.classList.add("show");
+              targetEl.style.animation = "slideDownBounce 0.5s ease-out";
+              card.style.transform = "translateY(-5px) scale(1.02)";
+
+              // Change button with icon spin
+              const icon = button.querySelector("i");
+              icon.style.transform = "rotate(180deg)";
+              setTimeout(() => {
+                button.innerHTML =
+                  '<i class="fas fa-eye-slash"></i> Sembunyikan Detail';
+                icon.style.transform = "";
+              }, 150);
+            }
+          });
+
+          // Add staggered entrance animation
+          setTimeout(() => {
+            button.style.opacity = "1";
+            button.style.transform = "translateY(0)";
+          }, index * 100);
+        });
+
+      // 🚀 Enhanced Smooth Scrolling with Progress Indicator
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+
+          if (target) {
+            // Add navigation ripple effect
+            this.style.position = "relative";
+            const navRipple = document.createElement("span");
+            navRipple.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 0;
+                        height: 0;
+                        border-radius: 50%;
+                        background: rgba(102, 126, 234, 0.3);
+                        transform: translate(-50%, -50%);
+                        animation: navRipple 0.6s ease-out;
+                    `;
+            this.appendChild(navRipple);
+            setTimeout(() => navRipple.remove(), 600);
+
+            // Smooth scroll with custom easing
+            const startY = window.pageYOffset;
+            const targetY = target.offsetTop - 80;
+            const distance = targetY - startY;
+            const duration = Math.min(Math.abs(distance) / 2, 1000);
+            let startTime = null;
+
+            function easeInOutCubic(t) {
+              return t < 0.5
+                ? 4 * t * t * t
+                : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+            }
+
+            function scrollAnimation(currentTime) {
+              if (startTime === null) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const progress = Math.min(timeElapsed / duration, 1);
+
+              window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+
+              if (progress < 1) {
+                requestAnimationFrame(scrollAnimation);
+              }
+            }
+
+            requestAnimationFrame(scrollAnimation);
+
+            // Close mobile menu with animation
+            if (menuOpen) {
+              menuOpen = false;
+              mobileMenu.style.animation = "slideUpFade 0.3s ease-out";
+              setTimeout(() => mobileMenu.classList.remove("active"), 300);
+              const spans = menuToggle.querySelectorAll("span");
+              spans.forEach((span) => {
+                span.style.transform = "rotate(0deg) translate(0px, 0px)";
+                span.style.background = "var(--primary-gradient)";
+              });
+              spans[1].style.opacity = "1";
+            }
+          }
+        });
+      });
+
+      // 🎭 Enhanced Scroll Animation with Stagger Effect
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add("animated");
+              entry.target.style.animation = "fadeInUp 0.8s ease-out forwards";
+            }, index * 200);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(50px)";
+        observer.observe(el);
+      });
+
+      // 🌊 Enhanced Parallax with Multiple Layers
+      let ticking = false;
+
+      function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector(".hero");
+        const heroContent = document.querySelector(".hero-content");
+
+        if (hero && heroContent) {
+          // Multi-layer parallax
+          heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+          hero.style.backgroundPosition = `center ${scrolled * 0.3}px`;
+
+          // Dynamic opacity based on scroll
+          const opacity = Math.max(1 - scrolled / 600, 0);
+          heroContent.style.opacity = opacity;
+        }
+
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+
+      // 🎯 Enhanced Card Hover with 3D Effects
+      document.querySelectorAll(".card").forEach((card, index) => {
+        card.addEventListener("mouseenter", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+
+          card.style.transform = `
+                    translateY(-15px) 
+                    scale(1.05) 
+                    rotateX(${rotateX}deg) 
+                    rotateY(${rotateY}deg)
+                    perspective(1000px)
+                `;
+          card.style.boxShadow = "0 25px 80px rgba(0, 0, 0, 0.3)";
+
+          // Image zoom effect
+          const img = card.querySelector(".card-image");
+          if (img) {
+            img.style.transform = "scale(1.1) rotate(2deg)";
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform =
+            "translateY(0) scale(1) rotateX(0deg) rotateY(0deg)";
+          card.style.boxShadow = "";
+
+          const img = card.querySelector(".card-image");
+          if (img) {
+            img.style.transform = "scale(1) rotate(0deg)";
+          }
+        });
+
+        // Add entrance animation delay
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        setTimeout(() => {
+          card.style.transition = "all 0.6s ease-out";
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        }, index * 150 + 500);
+      });
+
+      // 🌈 Dynamic Gradient Animation for Buttons
+      const gradients = [
+        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+        "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+        "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+        "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+        "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+      ];
+
+      document.querySelectorAll(".card-button").forEach((button, index) => {
+        const gradient = gradients[index % gradients.length];
+        button.style.background = gradient;
+
+        // Add glow effect on hover
+        button.addEventListener("mouseenter", () => {
+          button.style.boxShadow = `0 8px 25px ${
+            gradients[index % gradients.length].match(/#[a-fA-F0-9]{6}/)[0]
+          }40`;
+          button.style.transform = "translateY(-3px) scale(1.05)";
+        });
+
+        button.addEventListener("mouseleave", () => {
+          button.style.boxShadow = "";
+          button.style.transform = "";
+        });
+      });
+
+      // 🎊 Floating Elements Animation
+      function createFloatingElements() {
+        const colors = ["#667eea", "#f093fb", "#4facfe", "#43e97b", "#fa709a"];
+
+        for (let i = 0; i < 5; i++) {
+          const element = document.createElement("div");
+          element.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${
+                      colors[Math.floor(Math.random() * colors.length)]
+                    };
+                    border-radius: 50%;
+                    pointer-events: none;
+                    opacity: 0.6;
+                    z-index: -1;
+                    animation: float${i} ${
+            Math.random() * 10 + 10
+          }s infinite ease-in-out;
+                `;
+
+          element.style.left = Math.random() * 100 + "%";
+          element.style.top = Math.random() * 100 + "%";
+
+          document.body.appendChild(element);
+        }
+      }
+
+      // Add floating elements after page load
+      setTimeout(createFloatingElements, 2000);
+
+      // 📱 Touch gesture support for mobile
+      let touchStartY = 0;
+      let touchEndY = 0;
+
+      document.addEventListener("touchstart", (e) => {
+        touchStartY = e.changedTouches[0].screenY;
+      });
+
+      document.addEventListener("touchend", (e) => {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartY - touchEndY;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe up - hide header faster
+            header.style.transform = "translateY(-100%)";
+          } else {
+            // Swipe down - show header
+            header.style.transform = "translateY(0)";
+          }
+        }
+      }
+
+      // Add dynamic CSS animations
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(4); opacity: 0; }
+            }
+            @keyframes navRipple {
+                to { width: 100px; height: 100px; opacity: 0; }
+            }
+            @keyframes slideDownFade {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes slideUpFade {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-20px); }
+            }
+            @keyframes slideDownBounce {
+                0% { opacity: 0; transform: translateY(-20px) scale(0.8); }
+                50% { transform: translateY(5px) scale(1.05); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            ${Array.from(
+              { length: 5 },
+              (_, i) => `
+                @keyframes float${i} {
+                    0%, 100% { transform: translateY(0px) rotate(0deg); }
+                    25% { transform: translateY(-${
+                      Math.random() * 20 + 10
+                    }px) rotate(90deg); }
+                    50% { transform: translateY(-${
+                      Math.random() * 40 + 20
+                    }px) rotate(180deg); }
+                    75% { transform: translateY(-${
+                      Math.random() * 20 + 10
+                    }px) rotate(270deg); }
+                }
+            `
+            ).join("")}
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
